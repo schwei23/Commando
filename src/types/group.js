@@ -1,6 +1,6 @@
 const ArgumentType = require('./base');
 const { disambiguation } = require('../util');
-const { escapeMarkdown } = require('discord.js');
+const { Util } = require('discord.js');
 
 class GroupArgumentType extends ArgumentType {
 	constructor(client) {
@@ -12,7 +12,7 @@ class GroupArgumentType extends ArgumentType {
 		if(groups.length === 1) return true;
 		if(groups.length === 0) return false;
 		return groups.length <= 15 ?
-			`${disambiguation(groups.map(grp => escapeMarkdown(grp.name)), 'groups', null)}\n` :
+			`${disambiguation(groups.map(grp => Util.escapeMarkdown(grp.name)), 'groups', null)}\n` :
 			'Multiple groups found. Please be more specific.';
 	}
 

@@ -1,4 +1,4 @@
-const { escapeMarkdown } = require('discord.js');
+const { Util } = require('discord.js');
 const { oneLine, stripIndents } = require('common-tags');
 const isPromise = require('is-promise');
 const ArgumentUnionType = require('../types/union');
@@ -265,7 +265,7 @@ class Argument {
 
 				// Prompt the user for a new value
 				if(val) {
-					const escaped = escapeMarkdown(val).replace(/@/g, '@\u200b');
+					const escaped = Util.escapeMarkdown(val).replace(/@/g, '@\u200b');
 					prompts.push(await msg.reply(stripIndents`
 						${valid ? valid : oneLine`
 							You provided an invalid ${this.label},

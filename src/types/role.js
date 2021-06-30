@@ -1,6 +1,6 @@
 const ArgumentType = require('./base');
 const { disambiguation } = require('../util');
-const { escapeMarkdown } = require('discord.js');
+const { Util } = require('discord.js');
 
 class RoleArgumentType extends ArgumentType {
 	constructor(client) {
@@ -24,7 +24,7 @@ class RoleArgumentType extends ArgumentType {
 		}
 		if(exactRoles.size > 0) roles = exactRoles;
 		return roles.size <= 15 ?
-			`${disambiguation(roles.map(role => `${escapeMarkdown(role.name)}`), 'roles', null)}\n` :
+			`${disambiguation(roles.map(role => `${Util.escapeMarkdown(role.name)}`), 'roles', null)}\n` :
 			'Multiple roles found. Please be more specific.';
 	}
 

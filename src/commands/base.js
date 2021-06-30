@@ -1,5 +1,5 @@
 const path = require('path');
-const { escapeMarkdown } = require('discord.js');
+const { Util } = require('discord.js');
 const { oneLine, stripIndents } = require('common-tags');
 const ArgumentCollector = require('./collector');
 const { permissions } = require('../util');
@@ -346,7 +346,7 @@ class Command {
 		const owners = this.client.owners;
 		const ownerList = owners ? owners.map((usr, i) => {
 			const or = i === owners.length - 1 && owners.length > 1 ? 'or ' : '';
-			return `${or}${escapeMarkdown(usr.username)}#${usr.discriminator}`;
+			return `${or}${Util.escapeMarkdown(usr.username)}#${usr.discriminator}`;
 		}).join(owners.length > 2 ? ', ' : ' ') : '';
 
 		const invite = this.client.options.invite;

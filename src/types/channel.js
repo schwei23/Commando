@@ -1,6 +1,6 @@
 const ArgumentType = require('./base');
 const { disambiguation } = require('../util');
-const { escapeMarkdown } = require('discord.js');
+const { Util } = require('discord.js');
 
 class ChannelArgumentType extends ArgumentType {
 	constructor(client) {
@@ -24,7 +24,7 @@ class ChannelArgumentType extends ArgumentType {
 		}
 		if(exactChannels.size > 0) channels = exactChannels;
 		return channels.size <= 15 ?
-			`${disambiguation(channels.map(chan => escapeMarkdown(chan.name)), 'channels', null)}\n` :
+			`${disambiguation(channels.map(chan => Util.escapeMarkdown(chan.name)), 'channels', null)}\n` :
 			'Multiple channels found. Please be more specific.';
 	}
 

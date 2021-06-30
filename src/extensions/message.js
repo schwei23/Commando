@@ -1,4 +1,4 @@
-const { Structures, escapeMarkdown, splitMessage, verifyString } = require('discord.js');
+const { Structures, Util } = require('discord.js');
 const { oneLine } = require('common-tags');
 const Command = require('../commands/base');
 const FriendlyError = require('../errors/friendly');
@@ -283,7 +283,7 @@ module.exports = Structures.extend('Message', Message => {
 				}
 			}
 
-			content = verifyString(content);
+			content = Util.verifyString(content);
 
 			switch(type) {
 				case 'plain':
@@ -302,7 +302,7 @@ module.exports = Structures.extend('Message', Message => {
 						if(!options.split.prepend) options.split.prepend = `\`\`\`${lang || ''}\n`;
 						if(!options.split.append) options.split.append = '\n```';
 					}
-					content = `\`\`\`${lang || ''}\n${escapeMarkdown(content, true)}\n\`\`\``;
+					content = `\`\`\`${lang || ''}\n${Util.escapeMarkdown(content, true)}\n\`\`\``;
 					return this.editCurrentResponse(channelIDOrDM(this.channel), { type, content, options });
 				default:
 					throw new RangeError(`Unknown response type "${type}".`);
@@ -318,7 +318,7 @@ module.exports = Structures.extend('Message', Message => {
 		 */
 		editResponse(response, { type, content, options }) {
 			if(!response) return this.respond({ type, content, options, fromEdit: true });
-			if(options && options.split) content = splitMessage(content, options.split);
+			if(options && options.split) content = Util.splitMessage(content, options.split);
 
 			let prepend = '';
 			if(type === 'reply') prepend = `${this.author}, `;
